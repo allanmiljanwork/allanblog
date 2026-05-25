@@ -1,7 +1,8 @@
 <?php
 
-use App\Http\Controllers\{PostController, PublicController};
 use Illuminate\Support\Facades\Route;
+
+use App\Http\Controllers\{PostController, PublicController};
 
 Route::get('/', [PublicController::class, 'index'])->name('home');
 Route::get('/page1', [PublicController::class, 'page1'])->name('page1');
