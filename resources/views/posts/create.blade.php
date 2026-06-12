@@ -22,6 +22,7 @@
                     @enderror
                 </fieldset>
                 <button class="btn btn-primary">Create</button>
+                </div>
             </form>
         </div>
     </div>
