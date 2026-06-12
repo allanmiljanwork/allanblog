@@ -7,16 +7,15 @@
         @csrf
 
         <!-- Password -->
-        <div>
-            <x-input-label for="password" :value="__('Password')" />
 
-            <x-text-input id="password" class="block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="current-password" />
-
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
-        </div>
+        <fieldset class="fieldset">
+            <legend class="fieldset-legend">{{ __('Password') }}</legend>
+            <input name="current_password" type="password" name="password" required autocomplete="current-password"
+                class="input w-full @error('password') input-error @enderror" placeholder="Current Password" />
+            @error('current_password')
+                <p class="label text-error">{{ $message }}</p>
+            @enderror
+        </fieldset>
 
         <div class="flex justify-end mt-4">
             <x-primary-button>
