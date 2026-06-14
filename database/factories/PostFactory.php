@@ -25,6 +25,7 @@ class PostFactory extends Factory
         // }
         $created = fake()->dateTimeBetween();
         $updated = fake()->dateTimeBetween($created);
+
         return [
             'title' => fake()->sentence,
             'body' => fake()->paragraphs(6, true),

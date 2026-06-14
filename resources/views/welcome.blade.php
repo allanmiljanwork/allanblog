@@ -4,6 +4,11 @@
     <div class="grid grid-cols-4 gap-2">
         @foreach ($posts as $post)
             <div class="card bg-base-300 shadow-sm">
+                @if ($post->image)
+                    <figure>
+                        <img src="{{ $post->image->pic }}">
+                    </figure>
+                @endif
                 <div class="card-body">
                     <h2 class="card-title">{{ $post->title }}</h2>
                     <p>{{ $post->snippet }}</p>
