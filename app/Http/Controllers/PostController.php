@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
+
 use App\Http\Requests\{StorePostRequest, UpdatePostRequest};
 use App\Models\Post;
 
@@ -12,7 +14,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::orderBy('id', 'ASC')->simplePaginate();
+        $posts = Post::orderBy('id', 'DESC')->simplePaginate();
         return view('posts.index', compact('posts'));
     }
 
@@ -30,6 +32,7 @@ class PostController extends Controller
     public function store(StorePostRequest $request)
     {
         $post = new Post($request->validated());
+        $post->user()->associate(Auth::user());
         $post->save();
         return redirect()->route('posts.index');
     }

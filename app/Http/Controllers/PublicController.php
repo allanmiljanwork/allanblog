@@ -2,15 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Post;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+
+use App\Models\Post;
 
 class PublicController extends Controller
 {
     public function index()
     {
-        $posts = Post::paginate(16);
+        $posts = Post::latest()->paginate(16);
         return view('welcome', compact('posts'));
     }
 
