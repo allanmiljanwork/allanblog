@@ -23,7 +23,6 @@ class PostFactory extends Factory
         // if(rand(0, 9)){
         //     $updated = $created;
         // }
-
         $created = fake()->dateTimeBetween();
         $updated = fake()->dateTimeBetween($created);
         return [
