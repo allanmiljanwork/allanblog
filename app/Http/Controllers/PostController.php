@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\{Auth, Storage, URL};
 
+use App\Models\{Image, Post};
 use App\Http\Requests\{StorePostRequest, UpdatePostRequest};
-use App\Models\Post;
 
 class PostController extends Controller
 {
@@ -34,6 +34,12 @@ class PostController extends Controller
         $post = new Post($request->validated());
         $post->user()->associate(Auth::user());
         $post->save();
+
+        $image = new Image();
+        $image->pic = $request->file('image')->store('', 'public');
+        $image->post()->associate($post);
+        $image->save();
+
         return redirect()->route('posts.index');
     }
 
