@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 class Post extends Model
 {
@@ -24,7 +25,18 @@ class Post extends Model
     protected function displayBody(): Attribute
     {
         return Attribute::get(function () {
-            return nl2br($this->body);
+            return nl2br(htmlspecialchars($this->body));
+        });
+
+    }
+
+    protected function authHasLiked(): Attribute
+    {
+        return Attribute::get(function () {
+            if (Auth::check()) {
+                return $this->likes()->where('user_id', Auth::user()->id)->exists();
+            }
+            return false;
         });
 
     }
@@ -43,5 +55,11 @@ class Post extends Model
     {
         return $this->hasMany(Comment::class);
     }
+
+    public function likes()
+    {
+        return $this->hasMany(Like::class);
+    }
+
 
 }

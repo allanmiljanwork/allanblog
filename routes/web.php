@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
-use App\Http\Controllers\{PostController, ProfileController, PublicController};
+use App\Http\Controllers\{LikeController, PostController, ProfileController, PublicController};
 
 Route::get('/', [PublicController::class, 'index'])->name('home');
 Route::get('/page1', [PublicController::class, 'page1'])->name('page1');
@@ -15,11 +15,12 @@ Route::get('/dashboard', function () {
 
 Route::middleware('auth')->group(function () {
     Route::resource('/admin/posts', PostController::class);
-    
+
+    Route::post('post/{post}/like', [LikeController::class, 'store'])->name('post.like');
+
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
-
+require __DIR__ . '/auth.php';
