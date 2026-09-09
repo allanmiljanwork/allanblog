@@ -18,9 +18,12 @@
                             <li><a>Submenu 2</a></li>
                         </ul>
                     </li>
-                    <li><a>Item 3</a></li>
-                @endauth
-            </ul>
+                    <li>
+                        <a>My posts</a>
+                        <ul class="p-2">
+
+                        @endauth
+                    </ul>
         </div>
         <a class="btn btn-ghost text-xl" href="{{ route('home') }}">daisyUI</a>
     </div>
@@ -35,13 +38,17 @@
                         <summary>Admin</summary>
                         <ul class="p-2 z-1">
                             <li><a href="{{ route('posts.index') }}">Posts</a></li>
-                            <li><a>Submenu 2</a></li>
+                            <li><a href="{{ route('tags.index') }}">Tags</a></li>
                         </ul>
                     </details>
                 </li>
-            @endauth
-            <li><a>Item 3</a></li>
-        </ul>
+                <li>
+                    <a href="{{ route('user', ['user' => auth()->user()]) }}">
+                        {{ auth()->user()->name }}'s Posts
+                    </a>
+                </li>
+            </ul>
+        @endauth
     </div>
     <div class="navbar-end gap-2">
         @auth
