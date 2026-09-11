@@ -17,6 +17,7 @@ return new class extends Migration {
             $table->id();
             $table->string('title');
             $table->text('body')->nullable();
+            $table->string('slug');
             $table->foreignIdFor(User::class)->constrained()->cascadeOnDelete();
             $table->foreignIdFor(Category::class)->constrained()->cascadeOnDelete();
             $table->timestamps();
