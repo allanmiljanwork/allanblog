@@ -7,7 +7,7 @@
         @else
             <a class="join-item btn" href="{{ $paginator->previousPageUrl() }}" rel="prev"
                 aria-label="@lang('pagination.previous')">«</a>
-        @endif
+        @endifdefined variable $elements
 
         {{-- Pagination Elements --}}
         @foreach ($elements as $element)

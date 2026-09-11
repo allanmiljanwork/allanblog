@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-use App\Models\{Post, Tag, User};
+use App\Models\{Post, Tag, User, Category};
 
 class PublicController extends Controller
 {
@@ -41,6 +41,12 @@ class PublicController extends Controller
         $posts = $user->posts()->with(['images', 'tags'])->withCount(['comments', 'likes'])->latest()->paginate(16);
 
         return view('user', compact('user', 'posts'));
+    }
+
+    public function category(Category $category)
+    {
+        $posts = $category->posts()->with('images', 'user', 'tags')->withCount('comments', 'likes')->latest()->simplePaginate(16);
+        return view('welcome', compact('posts'));
     }
 
 }
