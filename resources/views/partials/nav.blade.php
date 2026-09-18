@@ -15,16 +15,16 @@
                         <a>Admin</a>
                         <ul class="p-2">
                             <li><a href="{{ route('posts.index') }}">Posts</a></li>
-                    </li>
-                    <li>
-                        <a href="{{ route('user', ['user' => auth()->user()]) }}">
-                            {{ auth()->user()->name }}'s Posts
-                        </a>
+                            <li><a href="{{ route('tags.index') }}">Tags</a></li>
                     </li>
                 </ul>
                 </li>
+                <li>
+                    <a href="{{ route('user', ['user' => auth()->user()]) }}">
+                        {{ auth()->user()->name }}'s Posts
+                    </a>
+                </li>
             @endauth
-            <li><a>Item 3</a></li>
             </ul>
         </div>
         <a class="btn btn-ghost text-xl" href="{{ route('home') }}">daisyUI</a>
@@ -39,16 +39,18 @@
                         <summary>Admin</summary>
                         <ul class="p-2 z-1">
                             <li><a href="{{ route('posts.index') }}">Posts</a></li>
-                </li>
-                <li>
-                    <a href="{{ route('user', ['user' => auth()->user()]) }}">
-                        {{ auth()->user()->name }}'s Posts
-                    </a>
+                            <li><a href="{{ route('tags.index') }}">Tags</a></li>
                 </li>
             </ul>
             </details>
             </li>
+            <li>
+                <a href="{{ route('user', ['user' => auth()->user()]) }}">
+                    {{ auth()->user()->name }}'s Posts
+                </a>
+            </li>
         @endauth
+
         <li> @include('partials.categories', ['name' => 'Categories', 'id' => null])</li>
         </ul>
     </div>
