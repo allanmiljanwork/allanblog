@@ -1,0 +1,20 @@
+services:
+    db:
+        image: mariadb
+        restart: always
+        environment:
+            MARIADB_ROOT_PASSWORD: example
+            MARIADB_DATABASE: blog
+        volumes:
+            - blogdbdata:/var/lib/mysql
+        ports:
+            - "3306:3306"
+
+    mailhog:
+        image: mailhog/mailhog
+        ports:
+            - "1025:1025"
+            - "8025:8025"
+
+volumes:
+    blogdbdata:
