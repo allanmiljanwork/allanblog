@@ -17,7 +17,7 @@ Route::get('/dashboard', function () {
 
 Route::get('user/{user}', [PublicController::class, 'user'])->name('user');
 
-Route::middleware('auth')->group(function () {
+Route::middleware('auth', 'verified')->group(function () {
 
     Route::resource('/admin/posts', PostController::class);
 

@@ -45,7 +45,8 @@
                 <fieldset class="fieldset">
                     <legend class="fieldset-legend">{{ __('Confirm Password') }}</legend>
                     <input value="{{ old('password_confirmation') }}" name="password_confirmation" type="password" required
-                        autocomplete="new-password" class="input w-full @error('password_confirmation') input-error @enderror"
+                        autocomplete="new-password"
+                        class="input w-full @error('password_confirmation') input-error @enderror"
                         placeholder="Confirm Password" />
                     @error('password_confirmation')
                         <p class="label text-error">{{ $message }}</p>
