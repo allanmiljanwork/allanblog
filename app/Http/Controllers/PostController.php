@@ -14,12 +14,10 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::orderBy('id', 'DESC')->simplePaginate();
-
+        $posts = Post::latest()->with(['images', 'user'])->simplePaginate();
         if (request()->wantsJson()) {
             return $posts;
         }
-
         return view('posts.index', compact('posts'));
     }
 
