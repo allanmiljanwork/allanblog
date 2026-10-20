@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Auth;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\{RedirectResponse, Request};
 use Illuminate\Support\Facades\{Auth, Hash};
-use Illuminate\Validation\{Rules, ValidationException};
+use Illuminate\Validation\Rules;
 use Illuminate\View\View;
 
 use App\Http\Controllers\Controller;
@@ -24,9 +24,9 @@ class RegisteredUserController extends Controller
     /**
      * Handle an incoming registration request.
      *
-     * @throws ValidationException
+     * @throws \Illuminate\Validation\ValidationException
      */
-    public function store(Request $request): RedirectResponse
+    public function store(Request $request): RedirectResponse|User
     {
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
@@ -43,7 +43,9 @@ class RegisteredUserController extends Controller
         event(new Registered($user));
 
         Auth::login($user);
-
+        if($request->wantsJson()) {
+            return $user;
+        }
         return redirect(route('home', absolute: false));
     }
 }
