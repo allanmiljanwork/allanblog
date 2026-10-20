@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-use App\Models\{Post, Tag, User, Category};
+use App\Models\{Category, Post, Tag, User};
 
 class PublicController extends Controller
 {
@@ -17,6 +17,10 @@ class PublicController extends Controller
 
     public function post(Post $post)
     {
+        if (request()->wantsJson()) {
+            return $post;
+        }
+
         return view('post', compact('post'));
     }
 

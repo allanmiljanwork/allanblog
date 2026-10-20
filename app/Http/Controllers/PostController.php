@@ -15,6 +15,11 @@ class PostController extends Controller
     public function index()
     {
         $posts = Post::orderBy('id', 'DESC')->simplePaginate();
+
+        if (request()->wantsJson()) {
+            return $posts;
+        }
+
         return view('posts.index', compact('posts'));
     }
 
@@ -32,7 +37,12 @@ class PostController extends Controller
     public function store(StorePostRequest $request)
     {
         $post = new Post($request->validated());
-        $post->user()->associate(Auth::user());
+        $post->category()->associate(1);
+        if ($request->wantsJson()) {
+            $post->user()->associate(1);
+        } else {
+            $post->user()->associate(Auth::user());
+        }
         $post->save();
 
         if ($request->file('images')) {
@@ -43,6 +53,10 @@ class PostController extends Controller
                 $image->post()->associate($post);
                 $image->save();
             }
+        }
+
+        if ($request->wantsJson()) {
+            return $post;
         }
 
         return redirect()->route('posts.index');
@@ -70,6 +84,9 @@ class PostController extends Controller
     public function update(UpdatePostRequest $request, Post $post)
     {
         $post->update($request->validated());
+        if ($request->wantsJson()) {
+            return $post;
+        }
         return redirect()->route('posts.index');
     }
 
@@ -79,6 +96,11 @@ class PostController extends Controller
     public function destroy(Post $post)
     {
         $post->delete();
+
+        if (request()->wantsJson()) {
+            return $post;
+        }
+
         return redirect()->route('posts.index');
     }
 }

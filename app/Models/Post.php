@@ -6,8 +6,7 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
-use Spatie\Sluggable\HasSlug;
-use Spatie\Sluggable\SlugOptions;
+use Spatie\Sluggable\{HasSlug, SlugOptions};
 
 class Post extends Model
 {
@@ -24,6 +23,7 @@ class Post extends Model
         return 'slug';
     }
     protected $fillable = ['title', 'body'];
+    protected $appends = ['snippet'];
 
     protected function snippet(): Attribute
     {
