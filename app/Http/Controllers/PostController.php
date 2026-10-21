@@ -2,15 +2,10 @@
 
 namespace App\Http\Controllers;
 
-<<<<<<< HEAD
-use App\Http\Requests\{StorePostRequest, UpdatePostRequest};
-use App\Models\Post;
-=======
 use Illuminate\Support\Facades\{Auth, Storage, URL};
 
 use App\Models\{Image, Post};
 use App\Http\Requests\{StorePostRequest, UpdatePostRequest};
->>>>>>> windows
 
 class PostController extends Controller
 {
@@ -19,14 +14,10 @@ class PostController extends Controller
      */
     public function index()
     {
-<<<<<<< HEAD
-        $posts = Post::orderBy('id', 'ASC')->simplePaginate();
-=======
         $posts = Post::latest()->with(['images', 'user'])->simplePaginate();
         if (request()->wantsJson()) {
             return $posts;
         }
->>>>>>> windows
         return view('posts.index', compact('posts'));
     }
 
@@ -44,9 +35,6 @@ class PostController extends Controller
     public function store(StorePostRequest $request)
     {
         $post = new Post($request->validated());
-<<<<<<< HEAD
-        $post->save();
-=======
         $post->category()->associate(1);
         if ($request->wantsJson()) {
             $post->user()->associate(1);
@@ -69,7 +57,6 @@ class PostController extends Controller
             return $post;
         }
 
->>>>>>> windows
         return redirect()->route('posts.index');
     }
 
@@ -95,12 +82,9 @@ class PostController extends Controller
     public function update(UpdatePostRequest $request, Post $post)
     {
         $post->update($request->validated());
-<<<<<<< HEAD
-=======
         if ($request->wantsJson()) {
             return $post;
         }
->>>>>>> windows
         return redirect()->route('posts.index');
     }
 
@@ -110,14 +94,11 @@ class PostController extends Controller
     public function destroy(Post $post)
     {
         $post->delete();
-<<<<<<< HEAD
-=======
 
         if (request()->wantsJson()) {
             return $post;
         }
 
->>>>>>> windows
         return redirect()->route('posts.index');
     }
 }

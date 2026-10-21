@@ -2,15 +2,6 @@
 @section('title', 'Home page')
 @section('content')
     <div class="card bg-base-300 shadow-sm">
-<<<<<<< HEAD
-        <div class="card-body">
-            <h2 class="card-title">{{ $post->title }}</h2>
-            <p>{!! $post->displayBody !!}</p>
-            <div class="card-actions justify-end">
-            </div>
-        </div>
-    </div>
-=======
 
         @if ($post->images->count() === 1)
             <figure>
@@ -47,5 +38,4 @@
         </div>
     @endforeach
 
->>>>>>> windows
 @endsection

@@ -5,20 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-<<<<<<< HEAD
-=======
 use Illuminate\Support\Facades\Auth;
 use Spatie\Sluggable\{HasSlug, SlugOptions};
->>>>>>> windows
 
 class Post extends Model
 {
     /** @use HasFactory<\Database\Factories\PostFactory> */
-<<<<<<< HEAD
-    use HasFactory;
-
-    protected $fillable = ['title', 'body'];
-=======
     use HasFactory, HasSlug;
 
     public function getSlugOptions(): SlugOptions
@@ -32,7 +24,6 @@ class Post extends Model
     }
     protected $fillable = ['title', 'body'];
     protected $appends = ['snippet'];
->>>>>>> windows
 
     protected function snippet(): Attribute
     {
@@ -45,18 +36,11 @@ class Post extends Model
     protected function displayBody(): Attribute
     {
         return Attribute::get(function () {
-<<<<<<< HEAD
-            return nl2br($this->body);
-=======
             return nl2br(htmlspecialchars($this->body));
->>>>>>> windows
         });
 
     }
 
-<<<<<<< HEAD
-}
-=======
     protected function authHasLiked(): Attribute
     {
         return Attribute::get(function () {
@@ -100,4 +84,3 @@ class Post extends Model
 
 
 }
->>>>>>> windows

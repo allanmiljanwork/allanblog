@@ -2,31 +2,18 @@
 
 namespace App\Models;
 
-<<<<<<< HEAD
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Database\Factories\UserFactory;
-use Illuminate\Database\Eloquent\Attributes\Fillable;
-use Illuminate\Database\Eloquent\Attributes\Hidden;
-=======
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Attributes\{Fillable, Hidden};
->>>>>>> windows
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-<<<<<<< HEAD
-#[Fillable(['name', 'email', 'password'])]
-#[Hidden(['password', 'remember_token'])]
-class User extends Authenticatable
-=======
 use App\Models\Post;
 use Database\Factories\UserFactory;
 
 #[Fillable(['name', 'email', 'password'])]
 #[Hidden(['password', 'remember_token'])]
 class User extends Authenticatable implements MustVerifyEmail
->>>>>>> windows
 {
     /** @use HasFactory<UserFactory> */
     use HasFactory, Notifiable;
@@ -43,9 +30,6 @@ class User extends Authenticatable implements MustVerifyEmail
             'password' => 'hashed',
         ];
     }
-<<<<<<< HEAD
-}
-=======
 
     public function posts()
     {
@@ -69,4 +53,3 @@ class User extends Authenticatable implements MustVerifyEmail
 
 
 }
->>>>>>> windows

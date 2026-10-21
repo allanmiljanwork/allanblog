@@ -1,19 +1,9 @@
 @extends('partials.layout')
-<<<<<<< HEAD
-@section('title', 'Home page')
-=======
 @section('title', 'Dashboard page')
->>>>>>> windows
 @section('content')
     <div class="grid grid-cols-4 gap-2">
         @foreach ($posts as $post)
             <div class="card bg-base-300 shadow-sm">
-<<<<<<< HEAD
-                <div class="card-body">
-                    <h2 class="card-title">{{ $post->title }}</h2>
-                    <p>{{ $post->snippet }}</p>
-                    <div class="card-actions justify-end">
-=======
 
                 @if ($post->images->count() === 1)
                     <figure>
@@ -58,7 +48,6 @@
                                 <button class="btn btn-secondary">Like</button>
                             @endif
                         </form>
->>>>>>> windows
                         <a href="{{ route('post', ['post' => $post]) }}" class="btn btn-primary">Read more</a>
                     </div>
                 </div>

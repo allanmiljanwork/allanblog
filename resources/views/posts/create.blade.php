@@ -3,14 +3,9 @@
 @section('content')
     <div class="card bg-base-300">
         <div class="card-body">
-<<<<<<< HEAD
-            <form action="{{ route('posts.store') }}" method="POST">
-                @csrf
-=======
             <form action="{{ route('posts.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
 
->>>>>>> windows
                 <fieldset class="fieldset">
                     <legend class="fieldset-legend">Title</legend>
                     <input value="{{ old('title') }}" name="title" type="text"
@@ -19,10 +14,7 @@
                         <p class="label text-error">{{ $message }}</p>
                     @enderror
                 </fieldset>
-<<<<<<< HEAD
-=======
 
->>>>>>> windows
                 <fieldset class="fieldset">
                     <legend class="fieldset-legend">Content</legend>
                     <textarea name="body" class="textarea h-96 w-full @error('body') textarea-error @enderror"
@@ -31,11 +23,6 @@
                         <p class="label text-error">{{ $message }}</p>
                     @enderror
                 </fieldset>
-<<<<<<< HEAD
-                <button class="btn btn-primary">Create</button>
-            </form>
-        </div>
-=======
 
                 <fieldset class="fieldset">
                     <legend class="fieldset-legend">Images</legend>
@@ -50,6 +37,5 @@
         </div>
         </form>
     </div>
->>>>>>> windows
     </div>
 @endsection

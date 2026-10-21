@@ -10,20 +10,12 @@ use Tests\TestCase;
 |
 | The closure you provide to your test functions is always bound to a specific PHPUnit test
 | case class. By default, that class is "PHPUnit\Framework\TestCase". Of course, you may
-<<<<<<< HEAD
-| need to change it using the "pest()" function to bind different classes or traits.
-=======
 | need to change it using the "pest()" function to bind a different classes or traits.
->>>>>>> windows
 |
 */
 
 pest()->extend(TestCase::class)
-<<<<<<< HEAD
- // ->use(RefreshDatabase::class)
-=======
     ->use(RefreshDatabase::class)
->>>>>>> windows
     ->in('Feature');
 
 /*
