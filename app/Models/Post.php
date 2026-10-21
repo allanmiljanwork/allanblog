@@ -5,13 +5,34 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+<<<<<<< HEAD
+=======
+use Illuminate\Support\Facades\Auth;
+use Spatie\Sluggable\{HasSlug, SlugOptions};
+>>>>>>> windows
 
 class Post extends Model
 {
     /** @use HasFactory<\Database\Factories\PostFactory> */
+<<<<<<< HEAD
     use HasFactory;
 
     protected $fillable = ['title', 'body'];
+=======
+    use HasFactory, HasSlug;
+
+    public function getSlugOptions(): SlugOptions
+    {
+        return SlugOptions::create()->generateSlugsFrom('title')->saveSlugsTo('slug');
+    }
+
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
+    protected $fillable = ['title', 'body'];
+    protected $appends = ['snippet'];
+>>>>>>> windows
 
     protected function snippet(): Attribute
     {
@@ -24,9 +45,59 @@ class Post extends Model
     protected function displayBody(): Attribute
     {
         return Attribute::get(function () {
+<<<<<<< HEAD
             return nl2br($this->body);
+=======
+            return nl2br(htmlspecialchars($this->body));
+>>>>>>> windows
         });
 
     }
 
+<<<<<<< HEAD
 }
+=======
+    protected function authHasLiked(): Attribute
+    {
+        return Attribute::get(function () {
+            if (Auth::check()) {
+                return $this->likes()->where('user_id', Auth::user()->id)->exists();
+            }
+            return false;
+        });
+
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function images()
+    {
+        return $this->hasMany(Image::class);
+    }
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
+
+    public function likes()
+    {
+        return $this->hasMany(Like::class);
+    }
+
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class);
+    }
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
+
+
+}
+>>>>>>> windows
