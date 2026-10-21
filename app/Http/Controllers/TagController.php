@@ -2,8 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreTagRequest;
-use App\Http\Requests\UpdateTagRequest;
+use App\Http\Requests\{StoreTagRequest, UpdateTagRequest};
 use App\Models\Tag;
 
 class TagController extends Controller
@@ -14,10 +13,16 @@ class TagController extends Controller
     public function index()
     {
 
-        $tags = Tag::orderBy('id', 'DESC')->simplePaginate();
+        $tags = Tag::orderByDesc('id')->simplePaginate();
+
+        if (request()->wantsJson()) {
+            return $tags;
+        }
         return view('tags.index', compact('tags'));
 
     }
+
+
 
     /**
      * Show the form for creating a new resource.
@@ -34,6 +39,10 @@ class TagController extends Controller
     {
         $tag = new Tag($request->validated());
         $tag->save();
+
+        if ($request->wantsJson()) {
+            return $tag;
+        }
 
         return redirect()->route('tags.index');
     }
@@ -60,6 +69,10 @@ class TagController extends Controller
     public function update(UpdateTagRequest $request, Tag $tag)
     {
         $tag->update($request->validated());
+
+        if ($request->wantsJson()) {
+            return $tag;
+        }
         return redirect()->route('tags.index');
     }
 
@@ -69,6 +82,11 @@ class TagController extends Controller
     public function destroy(Tag $tag)
     {
         $tag->delete();
+
+        if (request()->wantsJson()) {
+            return $tag;
+        }
+
         return redirect()->route('tags.index');
     }
 }
